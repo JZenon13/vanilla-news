@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import NavBar from "./NavBar";
-import TopHeadlines from "./TopNews/TopHeadlines";
 import { getTopHeadlines } from "./api/news";
-import TopNews from "./TopNews/TopNews";
 
 function App() {
   const [topHeadlines, setTopHeadlines] = useState([]);
@@ -13,8 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      <TopNews topHeadlines={topHeadlines} />
+      <NavBar {...{ topHeadlines }} />
     </div>
   );
 }

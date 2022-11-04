@@ -1,10 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./topHeadlines.css";
 
 function TopHeadlines({ topHeadline }) {
-  const navigate = useNavigate();
-  console.log(topHeadline);
   return (
     <div>
       <div
