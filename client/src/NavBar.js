@@ -8,7 +8,8 @@ import Sports from "./Categories/Sports";
 import Technology from "./Categories/Technology";
 import SearchedTopic from "./TopNews/SearchedTopic";
 import TopNews from "./TopNews/TopNews";
-function NavBar({ topHeadlines }) {
+
+function NavBar({ topHeadlines, username }) {
   const [business, setBusiness] = useState("");
   const [entertainment, setEntertainment] = useState("");
   const [general, setGeneral] = useState("");
@@ -33,9 +34,7 @@ function NavBar({ topHeadlines }) {
           aria-controls="navbarNavAltMarkup"
           aria-expanded="false"
           aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        ></button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <div
@@ -105,15 +104,23 @@ function NavBar({ topHeadlines }) {
             >
               Search
             </button>
-          </form>
+          </form>{" "}
+          <span
+            style={{
+              color: "white",
+            }}
+          >
+            Hi {username}
+          </span>
         </div>
+
         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
           Logout
         </button>
       </nav>
       <Routes>
         <Route path="/" element={<TopNews {...{ topHeadlines }} />} />
-        <Route path="/business" element={<Business business={business} />} />
+        <Route path="/business" element={<Business {...{ business }} />} />
         <Route
           path="/entertainment"
           element={<Entertainment {...{ entertainment }} />}

@@ -4,10 +4,14 @@ import NavBar from "./NavBar";
 import Login from "./Login/Login";
 import { Routes, Route } from "react-router-dom";
 import { getTopHeadlines } from "./api/news";
+import useToken from "./useToken";
 
 function App() {
   const [topHeadlines, setTopHeadlines] = useState([]);
-  const [token, setToken] = useState("");
+  const { token, setToken } = useToken();
+  const [password, setPassword] = useState();
+  const [username, setUserName] = useState();
+
   useEffect(() => {
     getTopHeadlines().then((data) => setTopHeadlines(data.articles));
   }, []);
@@ -16,11 +20,20 @@ function App() {
   </Routes>;
 
   if (!token) {
-    return <Login setToken={setToken} />;
+    return (
+      <Login
+        setToken={setToken}
+        setUserName={setUserName}
+        setPassword={setPassword}
+        password={password}
+        username={username}
+      />
+    );
   }
+
   return (
     <div className="App">
-      <NavBar {...{ topHeadlines }} />
+      <NavBar {...{ topHeadlines, username }} />
     </div>
   );
 }
