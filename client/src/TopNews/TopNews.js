@@ -3,7 +3,7 @@ import TopHeadlines from "./TopHeadlines";
 
 function TopNews({ topHeadlines }) {
   return (
-    <>
+    <div>
       <div className="jumbotron jumbotron-fluid">
         <div className="container">
           <h1 className="display-4">Vanilla News</h1>
@@ -17,7 +17,7 @@ function TopNews({ topHeadlines }) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

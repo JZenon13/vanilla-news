@@ -1,27 +1,18 @@
-import React, { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Business from "./Categories/Business";
-import Entertainment from "./Categories/Entertainment";
-import General from "./Categories/General";
-import Science from "./Categories/Science";
-import Sports from "./Categories/Sports";
-import Technology from "./Categories/Technology";
-import SearchedTopic from "./TopNews/SearchedTopic";
-import TopNews from "./TopNews/TopNews";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function NavBar({ topHeadlines, username }) {
-  const [business, setBusiness] = useState("");
-  const [entertainment, setEntertainment] = useState("");
-  const [general, setGeneral] = useState("");
-  const [science, setScience] = useState("");
-  const [sports, setSports] = useState("");
-  const [technology, setTechnology] = useState("");
-  const [search, setSearch] = useState("");
+function NavBar({ username, search, setBusiness, setSearch, setUserName }) {
   const navigate = useNavigate();
 
   function handleSearch(e) {
     e.preventDefault();
     navigate("/searched", { state: { search: search } });
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+    setUserName("");
+    navigate("/logout");
   }
   return (
     <>
@@ -88,7 +79,7 @@ function NavBar({ topHeadlines, username }) {
             }}
           >
             <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -96,7 +87,7 @@ function NavBar({ topHeadlines, username }) {
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
-              class="btn btn-outline-light my-2 my-sm-0"
+              className="btn btn-outline-light my-2 my-sm-0"
               type="submit"
               onClick={(e) => {
                 handleSearch(e);
@@ -110,29 +101,18 @@ function NavBar({ topHeadlines, username }) {
               color: "white",
             }}
           >
-            Hi {username}
+            {username === ("" || undefined) ? null : `Hi ${username}`}
           </span>
         </div>
 
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+        <button
+          class="btn btn-outline-secondary my-2 my-sm-0"
+          type="submit"
+          onClick={handleLogout}
+        >
           Logout
         </button>
       </nav>
-      <Routes>
-        <Route path="/" element={<TopNews {...{ topHeadlines }} />} />
-        <Route path="/business" element={<Business {...{ business }} />} />
-        <Route
-          path="/entertainment"
-          element={<Entertainment {...{ entertainment }} />}
-        />
-        <Route path="/science" element={<Science {...{ science }} />} />
-        <Route path="/sports" element={<Sports {...{ sports }} />} />
-        <Route
-          path="/technology"
-          element={<Technology {...{ technology }} />}
-        />
-        <Route path="/searched" element={<SearchedTopic search={search} />} />
-      </Routes>
     </>
   );
 }
