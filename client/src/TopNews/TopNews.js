@@ -10,10 +10,10 @@ function TopNews({ topHeadlines }) {
           <p className="lead">As plain as it gets</p>
         </div>
       </div>
-      {topHeadlines?.map((topHeadline) => {
+      {topHeadlines?.map((topHeadline, i) => {
         return (
           <div className="d-inline-flex p-2">
-            <TopHeadlines topHeadline={topHeadline} key={topHeadline.author} />
+            <TopHeadlines topHeadline={topHeadline} key={i} />
           </div>
         );
       })}

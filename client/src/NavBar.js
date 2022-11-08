@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NavBar({ username, search, setBusiness, setSearch, setUserName }) {
+function NavBar({
+  username,
+  search,
+  setBusiness,
+  setSearch,
+  setUserName,
+  token,
+  setNewSearch,
+  newSearch,
+}) {
   const navigate = useNavigate();
+  const [logged, setLogged] = useState(true);
 
   function handleSearch(e) {
     e.preventDefault();
-    navigate("/searched", { state: { search: search } });
+    navigate(`/searched/${search}`);
   }
 
   function handleLogout() {
-    localStorage.clear();
+    localStorage.removeItem(token);
     setUserName("");
     navigate("/logout");
   }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -34,36 +45,36 @@ function NavBar({ username, search, setBusiness, setSearch, setUserName }) {
                 navigate("/business");
                 setBusiness(e.target.value);
               }}
+              style={{ cursor: "pointer" }}
             >
               Business
             </div>
             <div
               className="nav-item nav-link"
               onClick={() => navigate("/entertainment")}
+              style={{ cursor: "pointer" }}
             >
               Entertainment
             </div>
-            <div
-              className="nav-item nav-link"
-              onClick={() => navigate("/general")}
-            >
-              General
-            </div>
+
             <div
               className="nav-item nav-link"
               onClick={() => navigate("/science")}
+              style={{ cursor: "pointer" }}
             >
               Science
             </div>
             <div
               className="nav-item nav-link"
               onClick={() => navigate("/sports")}
+              style={{ cursor: "pointer" }}
             >
               Sports
             </div>
             <div
               className="nav-item nav-link"
               onClick={() => navigate("/technology")}
+              style={{ cursor: "pointer" }}
             >
               Technology
             </div>
@@ -90,12 +101,13 @@ function NavBar({ username, search, setBusiness, setSearch, setUserName }) {
               className="btn btn-outline-light my-2 my-sm-0"
               type="submit"
               onClick={(e) => {
+                setNewSearch(!newSearch);
                 handleSearch(e);
               }}
             >
               Search
             </button>
-          </form>{" "}
+          </form>
           <span
             style={{
               color: "white",
@@ -108,7 +120,11 @@ function NavBar({ username, search, setBusiness, setSearch, setUserName }) {
         <button
           class="btn btn-outline-secondary my-2 my-sm-0"
           type="submit"
-          onClick={handleLogout}
+          onClick={() => {
+            setLogged(!logged);
+            localStorage.removeItem(token);
+            handleLogout();
+          }}
         >
           Logout
         </button>

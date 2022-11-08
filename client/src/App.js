@@ -13,6 +13,7 @@ import Sports from "./Categories/Sports";
 import Technology from "./Categories/Technology";
 import SearchedTopic from "./TopNews/SearchedTopic";
 import Logout from "./Login/Logout";
+import SearchedTopicHeadlines from "./TopNews/SearchedTopicHeadlines";
 
 function App() {
   const [topHeadlines, setTopHeadlines] = useState([]);
@@ -26,10 +27,11 @@ function App() {
   const [sports, setSports] = useState("");
   const [technology, setTechnology] = useState("");
   const [search, setSearch] = useState("");
+  const [newSearch, setNewSearch] = useState(false);
 
   useEffect(() => {
     getTopHeadlines().then((data) => setTopHeadlines(data.articles));
-  }, []);
+  }, [username]);
 
   if (!token) {
     return (
@@ -54,9 +56,19 @@ function App() {
     <div className="App">
       {window.location.pathname === "/logout" ? null : (
         <NavBar
-          {...{ username, setBusiness, setSearch, search, setUserName }}
+          {...{
+            username,
+            setBusiness,
+            setSearch,
+            search,
+            setUserName,
+            token,
+            setNewSearch,
+            newSearch,
+          }}
         />
       )}
+
       <Routes>
         <Route path="/" element={<TopNews {...{ topHeadlines }} />} />
         <Route path="/business" element={<Business {...{ business }} />} />
@@ -70,8 +82,12 @@ function App() {
           path="/technology"
           element={<Technology {...{ technology }} />}
         />
-        <Route path="/searched" element={<SearchedTopic search={search} />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route
+          path="/searched/:result"
+          element={<SearchedTopic search={search} newSearch={newSearch} />}
+        />
+
+        <Route path="/logout" element={<Logout {...{ token }} />} />
       </Routes>
     </div>
   );

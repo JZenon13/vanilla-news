@@ -7,7 +7,6 @@ export const getEverything = async () => {
 };
 
 export const searchEverything = async (topic) => {
-  console.log(topic);
   const res = await fetch(
     `${BASE_URL}/everything?q=${topic}&apiKey=${API_KEY}`
   );

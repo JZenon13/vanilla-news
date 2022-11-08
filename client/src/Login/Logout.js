@@ -1,14 +1,37 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Logout() {
+function Logout({ token }) {
   const navigate = useNavigate();
   function handleLogin() {
     navigate("/login");
   }
   return (
     <div>
-      <button onClick={() => handleLogin()}>Login</button>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        ></button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav"></div>
+        </div>
+
+        <button
+          class="btn btn-outline-secondary my-2 my-sm-0"
+          type="submit"
+          onClick={() => {
+            localStorage.removeItem(token);
+          }}
+        >
+          Login
+        </button>
+      </nav>
     </div>
   );
 }
