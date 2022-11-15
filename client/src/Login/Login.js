@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { createUser } from "../api/user";
 
 async function loginUser(credentials) {
-  console.log(credentials);
   return fetch("http://localhost:5000/user", {
     method: "POST",
     headers: {
@@ -32,7 +31,7 @@ export default function Login({
       password,
       email,
     });
-    console.log("hi");
+
     setToken(token);
     createUser(token);
   };
@@ -43,7 +42,7 @@ export default function Login({
       username,
       password,
     });
-    console.log("hi");
+
     setToken(token);
     createUser(token);
   };

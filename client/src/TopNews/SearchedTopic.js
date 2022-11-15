@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { searchEverything } from "../api/news";
 import SearchedTopicHeadlines from "./SearchedTopicHeadlines";
 
-function SearchedTopic({ newSearch, search }) {
-  const location = useLocation();
+function SearchedTopic({ newSearch }) {
   const params = useParams();
   const [searchedHeadlines, setSearchedHeadlines] = useState([]);
   useEffect(() => {
@@ -12,7 +11,7 @@ function SearchedTopic({ newSearch, search }) {
       setSearchedHeadlines(data.articles)
     );
   }, [newSearch]);
-  console.log(params);
+
   return (
     <>
       <div style={{ fontSize: "35px" }}>
