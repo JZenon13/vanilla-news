@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 function Logout({ token }) {
   const navigate = useNavigate();
   function handleLogin() {
-    navigate("/login");
+    localStorage.clear(token);
+    navigate("/");
   }
   return (
     <div>
@@ -26,7 +27,8 @@ function Logout({ token }) {
           class="btn btn-outline-secondary my-2 my-sm-0"
           type="submit"
           onClick={() => {
-            localStorage.removeItem(token);
+            localStorage.clear(token);
+            handleLogin();
           }}
         >
           Login

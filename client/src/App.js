@@ -18,9 +18,11 @@ import SearchedTopicHeadlines from "./TopNews/SearchedTopicHeadlines";
 function App() {
   const [topHeadlines, setTopHeadlines] = useState([]);
   const { token, setToken } = useToken();
-  const [password, setPassword] = useState();
-  const [username, setUserName] = useState();
+  const [user, setUser] = useState();
+  const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
   const [business, setBusiness] = useState("");
+  const [email, setEmail] = useState("");
   const [entertainment, setEntertainment] = useState("");
   const [general, setGeneral] = useState("");
   const [science, setScience] = useState("");
@@ -45,6 +47,9 @@ function App() {
               setPassword={setPassword}
               password={password}
               username={username}
+              setEmail={setEmail}
+              email={email}
+              setUser={setUser}
             />
           }
         />

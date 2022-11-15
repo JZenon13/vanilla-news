@@ -20,7 +20,7 @@ function NavBar({
   }
 
   function handleLogout() {
-    localStorage.removeItem(token);
+    localStorage.clear(token);
     setUserName("");
     navigate("/logout");
   }
