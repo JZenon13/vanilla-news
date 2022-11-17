@@ -17,7 +17,7 @@ function Login() {
         <label>
           Email:
           <input
-            type="text"
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           ></input>
@@ -33,6 +33,10 @@ function Login() {
         {error && <div>{error}</div>}
         <button>Login</button>
       </form>
+      <img
+        src="https://www.giantfreakinrobot.com/wp-content/uploads/2022/06/hellotherethumb.jpg"
+        style={{ height: "80vh", padding: "10px" }}
+      />
     </div>
   );
 }

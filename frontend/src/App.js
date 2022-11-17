@@ -8,10 +8,10 @@ import SearchedTopic from "./pages/SearchedTopic";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <BrowserRouter>
         <Navbar />
-        <div className="pages">
+        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

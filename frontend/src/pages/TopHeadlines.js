@@ -10,7 +10,7 @@ function TopHeadlines() {
 
   return (
     <div>
-      <div>
+      <div style={{ textAlign: "center" }}>
         <div className="jumbotron jumbotron-fluid"></div>
         {topHeadlines?.map((topHeadline, i) => {
           return (
